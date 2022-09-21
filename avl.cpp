@@ -149,14 +149,17 @@ class AVL
         Node* target;
         target=NULL;
         taail=b.insertnode(val);
-        //cout<<taail->val<<" ";
+        //cout<<b.head->val<<endl;
+        //cout<<taail->val<<endl;
         while(taail)
         {
             
             left=0;
             right=0;
-            if(taail->prev!=NULL)
+            if(taail->prev!=NULL){
                 taail=taail->prev;
+                cout<<taail->val<<endl;
+            }
             else{
                 taail=NULL;
                 break;
@@ -170,15 +173,17 @@ class AVL
                 if(taail->left){
                    
                     left=taail->left->height;
+                    cout<<left<<endl;
                     }
 
             
-                if(taail->right)
+                if(taail->right){
                     right=taail->right->height;
-                
-               
+                    cout<<right<<endl;
+                }
                 if((left-right)>1 || (right-left)>1)
                 {
+                    cout<<left-right<<endl;
                     target=taail;
                    
                     break;
@@ -211,7 +216,7 @@ class AVL
         teempo=target;
         if(target->prev)
             teempo=target->prev;
-        cout<<target->val<<" "<<teempo->val<<endl;
+       // cout<<target->val<<" "<<teempo->val<<endl;
         if(arr[0]==0)
         {
             if(arr[1]==0)
@@ -226,11 +231,33 @@ class AVL
                 
                     target->right=bb;
             
-                    if(temp3!=target)
+                    if(teempo!=target)
                         teempo->right=aa;
                     else
                     {
-                        b.head==aa;
+                        b.head=aa;
+                    }
+                    int cd=0;
+                    int zx=0;
+                    int gh=0;
+                    int ak=0;
+                    if(aa->left)
+                        cd=aa->left->height;
+                    if(aa->right)
+                        zx=aa->right->height;
+
+                    if(target->left)
+                        gh=target->left->height;
+                    if(target->right)
+                        ak=target->right->height;
+                    aa->height=maxx(cd,zx)+1;
+                    target->height=maxx(gh,ak)+1;
+                    target->prev=aa;
+                    if(teempo!=target)
+                        aa->prev=teempo;
+                    else
+                    {
+                        aa->prev=NULL;
                     }
                 }
                 else
@@ -240,13 +267,34 @@ class AVL
                 
                     target->right=bb;
             
-                    if(temp3!=target)
+                    if(teempo!=target)
                         teempo->left=aa;
                     else
                     {
                         b.head=aa;
                     }
-                   
+                   int cd=0;
+                    int zx=0;
+                    int gh=0;
+                    int ak=0;
+                    if(aa->left)
+                        cd=aa->left->height;
+                    if(aa->right)
+                        zx=aa->right->height;
+
+                    if(target->left)
+                        gh=target->left->height;
+                    if(target->right)
+                        ak=target->right->height;
+                    aa->height=maxx(cd,zx)+1;
+                    target->height=maxx(gh,ak)+1;
+                    target->prev=aa;
+                    if(teempo!=target)
+                        aa->prev=teempo;
+                    else
+                    {
+                        aa->prev=NULL;
+                    }
                 }
             
             }
@@ -276,10 +324,47 @@ class AVL
                     target->right=a;
         
                     if(teempo!=target)
-                        teempo->right=aa;
+                        teempo->right=bb;
                     else
-                        b.head=aa;
-        
+                        b.head=bb;
+
+                     int cd=0;
+                    int zx=0;
+                    int gh=0;
+                    int ak=0;
+                    int hjh=0;
+                    int kjjk=0;
+                    if(aa->left)
+                        cd=aa->left->height;
+                    if(aa->right)
+                        zx=aa->right->height;
+
+                   
+
+                    if(target->left)
+                        gh=target->left->height;
+                    if(target->right)
+                        ak=target->right->height;
+                    if(bb->left)
+                        hjh=bb->left->height;
+                    if(bb->right)
+                        kjjk=bb->right->height;
+                    aa->height=maxx(cd,zx)+1;
+                    target->height=maxx(gh,ak)+1;
+                    bb->height=maxx(hjh,kjjk);
+                    if(b1)
+                        b1->prev=aa;
+                    aa->prev=bb;
+                    target->prev=bb;
+                    if(a)
+                        a->prev=target;
+
+                    if(teempo!=target)
+                        bb->prev=teempo;
+                    else
+                    {
+                        bb->prev=NULL;
+                    }
                 }
                 else{
                    
@@ -287,8 +372,45 @@ class AVL
                 
                     target->right=a;
         
-                    teempo->left=aa;
-                
+                    teempo->left=bb;
+                     int cd=0;
+                    int zx=0;
+                    int gh=0;
+                    int ak=0;
+                    int hjh=0;
+                    int kjjk=0;
+                    if(aa->left)
+                        cd=aa->left->height;
+                    if(aa->right)
+                        zx=aa->right->height;
+
+                   
+
+                    if(target->left)
+                        gh=target->left->height;
+                    if(target->right)
+                        ak=target->right->height;
+                    if(bb->left)
+                        hjh=bb->left->height;
+                    if(bb->right)
+                        kjjk=bb->right->height;
+                    aa->height=maxx(cd,zx)+1;
+                    target->height=maxx(gh,ak)+1;
+                    bb->height=maxx(hjh,kjjk);
+
+                    if(b1)
+                        b1->prev=aa;
+                    aa->prev=bb;
+                    target->prev=bb;
+                    if(a)
+                        a->prev=target;
+                        
+                    if(teempo!=target)
+                        bb->prev=teempo;
+                    else
+                    {
+                        bb->prev=NULL;
+                    }
                 }
             }
         }
@@ -309,10 +431,31 @@ class AVL
                     target->left=bb;
                     
                     if(teempo!=target)
-                        teempo->right=aa;
+                        teempo->right=bb;
                     else
-                        b.head=aa;
-                 
+                        b.head=bb;
+                    int cd=0;
+                    int zx=0;
+                    int gh=0;
+                    int ak=0;
+                    if(aa->left)
+                        cd=aa->left->height;
+                    if(aa->right)
+                        zx=aa->right->height;
+
+                    if(target->left)
+                        gh=target->left->height;
+                    if(target->right)
+                        ak=target->right->height;
+                    aa->height=maxx(cd,zx)+1;
+                    target->height=maxx(gh,ak)+1;
+                    target->prev=aa;
+                    if(teempo!=target)
+                        aa->prev=teempo;
+                    else
+                    {
+                        aa->prev=NULL;
+                    }
                 }
                 else
                 {
@@ -321,8 +464,29 @@ class AVL
                   
                     target->left=bb;
                 
-                    teempo->left=aa;
-                   
+                    teempo->left=bb;
+                    int cd=0;
+                    int zx=0;
+                    int gh=0;
+                    int ak=0;
+                    if(aa->left)
+                        cd=aa->left->height;
+                    if(aa->right)
+                        zx=aa->right->height;
+
+                    if(target->left)
+                        gh=target->left->height;
+                    if(target->right)
+                        ak=target->right->height;
+                    aa->height=maxx(cd,zx)+1;
+                    target->height=maxx(gh,ak)+1;
+                    target->prev=aa;
+                    if(teempo!=target)
+                        aa->prev=teempo;
+                    else
+                    {
+                        aa->prev=NULL;
+                    }
                 }
             }
             else if(arr[1]==0)
@@ -345,25 +509,97 @@ class AVL
                
                 if(target->val >= teempo->val)
                 {
-                   // cout<<51<<endl;
+                   
                     bb->right=target;
-                    //cout<<52<<endl;
+    
                     target->left=a;
-                   // cout<<53<<endl;
+                   
                     if(teempo!=target)
-                        teempo->right=aa;
+                        teempo->right=bb;
                     else
-                        b.head=aa;
-                    //cout<<54<<endl;
+                        b.head=bb;
+                    int cd=0;
+                    int zx=0;
+                    int gh=0;
+                    int ak=0;
+                    int hjh=0;
+                    int kjjk=0;
+                    if(aa->left)
+                        cd=aa->left->height;
+                    if(aa->right)
+                        zx=aa->right->height;
+
+                    if(target->left)
+                        gh=target->left->height;
+                    if(target->right)
+                        ak=target->right->height;
+                    if(bb->left)
+                        hjh=bb->left->height;
+                    if(bb->right)
+                        kjjk=bb->right->height;
+                    aa->height=maxx(cd,zx)+1;
+                    target->height=maxx(gh,ak)+1;
+                    bb->height=maxx(hjh,kjjk);
+                    if(b1)
+                        b1->prev=aa;
+                    aa->prev=bb;
+                    target->prev=bb;
+                    if(a)
+                        a->prev=target;
+                        
+                    if(teempo!=target)
+                        bb->prev=teempo;
+                    else
+                    {
+                        bb->prev=NULL;
+                    }
+
                 }
                 else{
-                    //cout<<55<<endl;
+                
                     bb->right=target;
-                    //cout<<56<<endl;
+                    
                     target->left=a;
-                   // cout<<57<<endl;
-                   teempo->left=aa;
-                    //cout<<58<<endl;
+                
+                   teempo->left=bb;
+                   int cd=0;
+                    int zx=0;
+                    int gh=0;
+                    int ak=0;
+                    int hjh=0;
+                    int kjjk=0;
+
+                    if(aa->left)
+                        cd=aa->left->height;
+                    if(aa->right)
+                        zx=aa->right->height;
+
+                    
+                    if(target->left)
+                        gh=target->left->height;
+                    if(target->right)
+                        ak=target->right->height;
+                    if(bb->left)
+                        hjh=bb->left->height;
+                    if(bb->right)
+                        kjjk=bb->right->height;
+                    aa->height=maxx(cd,zx)+1;
+                    target->height=maxx(gh,ak)+1;
+                    bb->height=maxx(hjh,kjjk);
+
+                    if(b1)
+                        b1->prev=aa;
+                    aa->prev=bb;
+                    target->prev=bb;
+                    if(a)
+                        a->prev=target;
+                        
+                    if(teempo!=target)
+                        bb->prev=teempo;
+                    else
+                    {
+                        bb->prev=NULL;
+                    }
                 }
             }
         }
@@ -389,11 +625,13 @@ int main()
     avl.insert(19);
     avl.insert(10);
     avl.insert(15);
-    avl.insert(23);
+    // avl.insert(23);
     // avl.insert(30);
     // avl.insert(28);
     // avl.insert(5);
     // avl.insert(25);
-   // avl.inorder(avl.b.head);
+    //cout<<endl;
+//     cout<<avl.b.head->val<<endl;
+//    avl.inorder(avl.b.head);
     return 0;
 }
