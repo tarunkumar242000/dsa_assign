@@ -7,12 +7,13 @@ using namespace std;
 
 class sparse
 {
+    public:
     int **sp;
     int row=0;
     int col=0;
     int cap=10;
     int size=0;
-    public:
+    
             sparse(int roow,int coolumn)
             {
                 row=roow;
@@ -149,7 +150,9 @@ class sparse
             sparse transpose_matrix()
             {
                 sparse ss(row,col);
+            
                 int temp;
+                
                 ss.in_sparse(sp[0][1],sp[0][0],sp[0][2]);
                 for(int i=1;i<size;i++)
                 {
@@ -158,20 +161,28 @@ class sparse
                     int casu=0;
                     while(temp--)
                     {
-                        int aaaa;
-                        
+                        int aaaa=0;
+                        int bbbb=0;
                         
                         if(casu)
-                             aaaa=sp[j][0];
+                            bbbb=ss.sp[j][1];
+                        else
+                            bbbb=sp[j][0];
+                        
+                        if(casu)
+                             aaaa=ss.sp[j][0];
                         else
                              aaaa=sp[j][1];
+        
                         if(aaaa<ss.sp[temp][0])
                         {
-                            cout<<1<<endl;
+                        
                             int a,b,c;
                             a=ss.sp[temp][0];
                             b=ss.sp[temp][1];
                             c=ss.sp[temp][2];
+                    
+                            
                            if(casu)
                            {ss.sp[temp][0]=ss.sp[j][0];
                            ss.sp[temp][1]=ss.sp[j][1];
@@ -182,7 +193,7 @@ class sparse
                            ss.sp[temp][1]=sp[j][0];
                            ss.sp[temp][2]=sp[j][2];   
                             }
-                        
+                           
                             if(casu==0)
                                 ss.in_sparse(a,b,c);
                             else
@@ -195,9 +206,9 @@ class sparse
                             j--;
                         }
                         else if(aaaa==ss.sp[temp][0]){
-                         if(sp[j][0]<ss.sp[temp][1])
+                         if(bbbb<ss.sp[temp][1])
                         {
-                            cout<<2<<endl;
+                        
                             int a,b,c;
                             a=ss.sp[temp][0];
                             b=ss.sp[temp][1];
@@ -213,7 +224,7 @@ class sparse
                                 ss.sp[temp][1]=sp[j][0];
                                 ss.sp[temp][2]=sp[j][2];
                             }
-                            
+                           
                             if(casu==0)
                                   ss.in_sparse(a,b,c);
                             else
@@ -227,6 +238,7 @@ class sparse
                         }
                         else
                             {
+                               
                                     if(casu==0)
                                         ss.in_sparse(sp[j][1],sp[j][0],sp[j][2]);
 
@@ -235,6 +247,7 @@ class sparse
                         }
                         else
                         {
+                               
                                 if(casu==0)
                                     ss.in_sparse(sp[j][1],sp[j][0],sp[j][2]);
 
@@ -507,7 +520,6 @@ class link
                             //cout<<10<<endl;
                            // sp3.in_sparse(sp2.sp[index2][0],sp2.sp[index2][1],sp2.sp[index2][2]);
                             l3.insert(temp2->row,temp2->col,temp2->val);
-                            cout<<11<<endl;
                             temp2=temp2->next;
                             //cout<<12<<endl;
                             index2++;
@@ -811,6 +823,7 @@ int main()
             }
             sparse sp3(n1,m1);
             sp3=sp1.addition(sp2);
+            cout<<endl<<endl;
             sp3.display();
         }
         else if(o==2)   //transpose
@@ -831,6 +844,7 @@ int main()
         }
         sparse sp3(m1,n1);
         sp3=sp1.transpose_matrix();
+        cout<<endl<<endl;
         sp3.display_transpose();
         }
         else            //multiplication
@@ -868,6 +882,7 @@ int main()
             }
             sparse sp3(n1,m2);
             sp3=sp1.multiplication(sp2);
+            cout<<endl<<endl;
             sp3.display();
         }
     }
@@ -911,6 +926,7 @@ int main()
             }
             link l3(row1,col1);
             l3=l1.addition(l2);
+            cout<<endl<<endl;
             l3.display();
         }
         else if(o==2) //transpose
@@ -920,7 +936,7 @@ int main()
             link l1(row1,col1);
             for(int i=0;i<row1;i++)
             {
-                for(j=0;j<col1;j++)
+                for(int j=0;j<col1;j++)
                 {
                     int a;
                     cin>>a;
@@ -933,6 +949,7 @@ int main()
 
             link l3(col1,row1);
             l3=l1.transpose();
+            cout<<endl<<endl;
             l3.t_disp();
         }
         else       //multiplication
@@ -971,6 +988,7 @@ int main()
             }
             link l3(row1,col1);
             l3=l1.muliplication(l2);
+            cout<<endl<<endl;
             l3.display();
 
      }
