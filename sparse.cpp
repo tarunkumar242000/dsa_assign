@@ -5,12 +5,13 @@ using namespace std;
 
 class sparse
 {
+    public:
     int **sp;
     int row=0;
     int col=0;
     int cap=10;
     int size=0;
-    public:
+    
             sparse(int roow,int coolumn)
             {
                 row=roow;
@@ -146,7 +147,7 @@ class sparse
             sparse transpose_matrix()
             {
                 sparse ss(row,col);
-                sparse temp1(row,col);
+                //sparse temp1(row,col);
                 int temp;
                 // ss.sp[0][0]=sp[0][1];
                 // ss.sp[0][1]=sp[0][0];
@@ -155,37 +156,113 @@ class sparse
                 {
                     temp=i;
                     int j=i;
+                    int casu=0;
                     while(temp--)
                     {
-                        if(sp[j][1]<ss.sp[temp][0])
+                        int aaaa;
+                        
+                        
+                        if(casu)
+                             aaaa=sp[j][0];
+                        else
+                             aaaa=sp[j][1];
+                        cout<<"spp"<<aaaa<<" "<<"sss"<<ss.sp[temp][0]<<endl;
+                        if(aaaa<ss.sp[temp][0])
                         {
+                            cout<<1<<endl;
+                            int a,b,c;
+                            a=ss.sp[temp][0];
+                            b=ss.sp[temp][1];
+                            c=ss.sp[temp][2];
                             // temp1.sp[temp][0]=ss.sp[temp][0];
                             // temp1.sp[temp][1]=ss.sp[temp][1];
-                            temp1.in_sparse(ss.sp[temp][0],ss.sp[temp][1],ss.sp[temp][2]);
+                            cout<<"sss"<<ss.sp[temp][0]<<" "<<ss.sp[temp][1]<<" "<<ss.sp[temp][2]<<endl;
+                           // temp1.in_sparse(ss.sp[temp][0],ss.sp[temp][1],ss.sp[temp][2]);
+                            
                             // ss.sp[temp][0]=sp[i][1];
                             // ss.sp[temp][1]=sp[i][0];
-                            ss.in_sparse(sp[i][1],sp[i][0],sp[i][2]);
+                           // ss.in_sparse(sp[i][1],sp[i][0],sp[i][2]);
+                           if(casu)
+                           {ss.sp[temp][0]=ss.sp[j][0];
+                           ss.sp[temp][1]=ss.sp[j][1];
+                           ss.sp[temp][2]=ss.sp[j][2];}
+                            else
+                            {
+                             ss.sp[temp][0]=sp[j][1];
+                           ss.sp[temp][1]=sp[j][0];
+                           ss.sp[temp][2]=sp[j][2];   
+                            }
+                           cout<<"aa"<<ss.sp[temp][0]<<endl;
+                            cout<<"bb"<<ss.sp[temp][1]<<endl;
+                            cout<<"cc"<<ss.sp[temp][2]<<endl;
                             // ss.sp[j][0]=temp1.sp[temp][0];
                             // ss.sp[j][1]=temp1.sp[temp][0];
-                            ss.in_sparse(temp1.sp[temp][1],temp1.sp[temp][0],temp1.sp[temp][2]);
+                            if(casu==0)
+                                ss.in_sparse(a,b,c);
+                            else
+                                {
+                                    ss.sp[temp+1][0]=a;
+                                    ss.sp[temp+1][1]=b;
+                                    ss.sp[temp+1][2]=c;
+                                }
+                            casu=1;
+                            j--;
                         }
-                        else if(sp[j][0]<ss.sp[temp][1])
+                        else if(aaaa==ss.sp[temp][0]){
+                         if(sp[j][0]<ss.sp[temp][1])
                         {
-                            temp1.in_sparse(ss.sp[temp][0],ss.sp[temp][1],ss.sp[temp][2]);
+                            cout<<2<<endl;
+                            int a,b,c;
+                            a=ss.sp[temp][0];
+                            b=ss.sp[temp][1];
+                            c=ss.sp[temp][2];
+                           // temp1.in_sparse(ss.sp[temp][0],ss.sp[temp][1],ss.sp[temp][2]);
                             // ss.sp[temp][0]=sp[i][1];
                             // ss.sp[temp][1]=sp[i][0];
-                            ss.in_sparse(sp[i][1],sp[i][0],sp[i][2]);
+                            //ss.in_sparse(sp[i][1],sp[i][0],sp[i][2]);
+                            if(casu)
+                            {ss.sp[temp][0]=ss.sp[j][0];
+                            ss.sp[temp][1]=ss.sp[j][1];
+                            ss.sp[temp][2]=ss.sp[j][2];}
+                            else
+                            {
+                                ss.sp[temp][0]=sp[j][1];
+                                ss.sp[temp][1]=sp[j][0];
+                                ss.sp[temp][2]=sp[j][2];
+                            }
                             // ss.sp[j][0]=temp1.sp[temp][0];
                             // ss.sp[j][1]=temp1.sp[temp][0];
-                            ss.in_sparse(temp1.sp[temp][1],temp1.sp[temp][0],temp1.sp[temp][2]);
+                            if(casu==0)
+                                  ss.in_sparse(a,b,c);
+                            else
+                            {
+                                ss.sp[temp+1][0]=a;
+                                ss.sp[temp+1][1]=b;
+                                ss.sp[temp+1][2]=c;   
+                            }
+                            casu=1;
+                            j--;
                         }
                         else
                             {
                                 // ss.sp[i][0]=sp[i][1];
                                 // ss.sp[i][1]=sp[i][0];
-                                ss.in_sparse(sp[i][1],sp[i][0],sp[i][2]);
+                                cout<<3<<endl;
+                                    if(casu==0)
+                                        ss.in_sparse(sp[j][1],sp[j][0],sp[j][2]);
+
                                 break;
                             }
+                        }
+                        else
+                        {
+                                cout<<33<<endl;
+                                cout<<"hghgjhgj"<<sp[j][0]<<" "<<sp[j][1]<<" "<<sp[j][2]<<endl;
+                                if(casu==0)
+                                    ss.in_sparse(sp[j][1],sp[j][0],sp[j][2]);
+
+                                break;
+                        }
                     }
                 }
                 return ss;
@@ -195,7 +272,7 @@ class sparse
             sparse multiplication(sparse sp2)
             {
                 //cout<<1<<endl;
-                sparse sp3(row,col);
+                sparse sp3(row,sp2.col);
                 int sum=0;
                 int temp;
                 int index1=0;
@@ -216,10 +293,9 @@ class sparse
                             row2=col1;
                             while(index1<size)
                             {
-                                if(sp[index1][0]>row1 || sp[index1][1]>col1)
-                                   break;
+                            
                                     
-                                else if(sp[index1][0]==row1 && sp[index1][1]==col1)
+                              if(sp[index1][0]==row1 && sp[index1][1]==col1)
                                 {
                                     a1=sp[index1][2];
                                     
@@ -231,11 +307,7 @@ class sparse
                             index1=0;
                             while(index2<sp2.size)
                             {
-                                if(sp2.sp[index2][0]>row2 || sp2.sp[index2][1]>col2)
-                                    
-                                        break;
-                                        
-                                else if(sp2.sp[index2][0]==row2 && sp2.sp[index2][1]==col2)
+                                if(sp2.sp[index2][0]==row2 && sp2.sp[index2][1]==col2)
                                 {
                                     a2=sp2.sp[index2][2];
                                     break;
@@ -247,21 +319,18 @@ class sparse
                             index2=0;
                             temp+=a1*a2;
                         }
-                        sp3.in_sparse(i,j,temp);
+                        if(temp!=0)
+                            sp3.in_sparse(i,j,temp);
                     }
                 }
                 return sp3;
             }
-            // void init_size(int a)
-            // {
-            //     size=a;
-            // }
-            // void create_matrix()
-            // {
-            //     sparse=new int*[size];
-            // }
-            void display()
+            
+
+
+            void display1()
             {
+
                 for(int i=0;i<size;i++)
                 {
                     for(int j=0;j<3;j++)
@@ -271,7 +340,81 @@ class sparse
                     cout<<endl;
                 }
             }
-            
+            void display()
+            {
+
+               int m=0;
+                for(int i=0;i<row;i++)
+                {
+                    for(int j=0;j<col;j++)
+                    {
+                        if(sp[m][0]==i && sp[m][1]==j)
+                            {
+                                cout<<sp[m][2]<<" ";
+                                if(i<size)
+                                    m++;
+                            }
+        
+                        else if(sp[m][0]==i && sp[m][1]<j)
+                        {
+                            while(i<size && sp[m][0]==i && sp[m][1]<j)
+                            {
+                                cout<<0<<" ";
+                                if(i<size)
+                                    i++;
+                            }
+                            if(sp[m][0]==i && sp[m][1]==j)
+                            {
+                                cout<<sp[m][2]<<" ";
+                                if(i<size)
+                                    i++;
+                            }
+                        }
+                        else
+                        {
+                            cout<<0<<" ";
+                        }
+                    }
+                    cout<<endl;
+                }
+            }
+           void display_transpose()
+            {
+               int m=0;
+                for(int i=0;i<col;i++)
+                {
+                    for(int j=0;j<row;j++)
+                    {
+                        if(sp[m][0]==i && sp[m][1]==j)
+                            {
+                                cout<<sp[m][2]<<" ";
+                                if(i<size)
+                                    m++;
+                            }
+        
+                        else if(sp[m][0]==i && sp[m][1]<j)
+                        {
+                            while(i<size && sp[m][0]==i && sp[m][1]<j)
+                            {
+                                cout<<0<<" ";
+                                if(i<size)
+                                    i++;
+                            }
+                            if(sp[m][0]==i && sp[m][1]==j)
+                            {
+                                cout<<sp[m][2]<<" ";
+                                if(i<size)
+                                    i++;
+                            }
+                        }
+                        else
+                        {
+                            cout<<0<<" ";
+                        }
+                    }
+                    cout<<endl;
+                }
+            } 
                                     
 };
 
@@ -300,28 +443,30 @@ int main()
     }
     cout<<endl<<endl;
     //sp1.display();
-    // int row2,column2;
-    // cin>>row2>>column2;
-    // sparse sp2(row2,column2);
-    // for(int i=0;i<row2;i++)
-    // {
-    //     for(int j=0;j<column2;j++)
-    //     {
-    //         int a;
-    //         cin>>a;
-    //         if(a!=0)
-    //         {
-    //             sp2.in_sparse(i,j,a);
-    //         }
-    //     }
-    // }
+    int row2,column2;
+    cin>>row2>>column2;
+    sparse sp2(row2,column2);
+    for(int i=0;i<row2;i++)
+    {
+        for(int j=0;j<column2;j++)
+        {
+            int a;
+            cin>>a;
+            if(a!=0)
+            {
+                sp2.in_sparse(i,j,a);
+            }
+        }
+    }
     //cout<<endl<<endl;
     //sp2.display();
-    sparse sp3(row1,column1);
+    sparse sp3(row1,column2);
+    cout<<endl;
+    sp3=sp1.multiplication(sp2);
     // sp3=sp1.addition(sp2);
     // sp3=sp1.multiplication(sp2);
-    sp3=sp1.transpose_matrix();
-    cout<<endl<<endl;
+    //sp3=sp1.transpose_matrix();
+    // cout<<endl<<endl;
     sp3.display();
     return 0;
 }

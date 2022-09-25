@@ -217,10 +217,8 @@ class link
                             row2=col1;
                             while(index1<size)
                             {
-                                if(temp1->row > row1 || temp1->col > col1)
-                                   break;
                                     
-                                else if(temp1->row == row1 && temp1->col == col1)
+                              if(temp1->row == row1 && temp1->col == col1)
                                 {
                                     a1=temp1->val;
                                     
@@ -236,11 +234,9 @@ class link
                             temp1=l.head;
                             while(index2<l2.size)
                             {
-                                if(temp2->row > row2 || temp2->col > col2)
-                                    
-                                        break;
+                                
                                         
-                                else if(temp2->row == row2 && temp2->col == col2)
+                                if(temp2->row == row2 && temp2->col == col2)
                                 {
                                     a2=temp2->val;
                                     break;
@@ -259,6 +255,34 @@ class link
                 }
                 return l3;
             }
+
+            // link transpose()
+            // {
+            //     link ll(row,col);
+            //     link temp1(row,col);
+            //     int temp;
+            //     ll.insert(l.head->row,l.head->col,l.head->val);
+            //     Node* lll;
+            //     Node* lo;
+            //     lo=l.head; //original matrix
+            //     lll=ll.l.head; //other matrix
+            //     lo=lo->next;
+            //     for(int i=1;i<size;i++)
+            //     {
+            //         temp=i;
+            //         while(temp--)
+            //         {
+            //              if(lo->col < lll->row)
+            //              {
+            //                 if(ll.l.head==lll)
+            //                 {
+                                
+            //                 }
+                            
+            //              }
+            //         }
+            //     }
+            // }
             void display()
             {
                 Node* temp;
@@ -293,7 +317,7 @@ int main()
         }
     }
 
-    //l1.display();
+
     int row2,col2;
     cin>>row2>>col2;
     link l2(row2,col2);
